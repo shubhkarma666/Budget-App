@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: budget-app
+  namespace: argocd
+spec:
+  destination:
+    namespace: budget-app
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: git@github.com:YOUR_USERNAME/budget-app-k8s.git
+    targetRevision: HEAD
+    path: manifests
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
